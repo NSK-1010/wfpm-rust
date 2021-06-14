@@ -3,6 +3,7 @@ extern crate tar;
 extern crate anyhow;
 extern crate tokyo;
 extern crate reqwest;
+extern crate helix;
 
 use std::fs;
 use std::fs::{File, OpenOptions};
@@ -23,7 +24,7 @@ let save_dir;
 let save_file
 
 #[tokio::main]
-async fn fileget(get_url, save_dir) -> Result<()> {
+async fn fileget(get_url: &str, save_dir: &str) -> Result<()> {
     let save_file = url.split("/").last().unwrap();
     let response: reqwest::Response = reqwest::get(url).await?;
     let bytes = response.bytes().await?;
@@ -35,17 +36,12 @@ async fn fileget(get_url, save_dir) -> Result<()> {
 
 let targzpath;
 
-fn targz_unpack(targzpath) -> Result<(), std::io::Error> {
+fn targz_unpack(targzpath: &str) -> Result<(), std::io::Error> {
     let tar_gz = File::open(targzpathpath)?;
     let tar = GzDecoder::new(tar_gz);
     let mut archive = Archive::new(tar);
     archive.unpack(".")?;
 
-    Ok(())
-}
-
-fn cp(cp_before, cp_after) -> std::io::Result<()> {
-    fs::rename(cp_before, cp_after)?;
     Ok(())
 }
 

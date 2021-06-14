@@ -12,3 +12,4 @@ repository = "https://github.com/nsk-1010/wfpm"
 anyhow
 tokyo
 reqwest
+helix
